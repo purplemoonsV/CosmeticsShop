@@ -1,0 +1,68 @@
+{% load static %}
+<html>
+<head>
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+        
+        @font-face {
+            font-family: "THSarabunNew";
+            src: url('C:/Users/k2002/CosmeticsShop/static/fonts/THSarabunNew.ttf');
+            
+            }
+        body{
+            font-family: "THSarabunNew";
+            font-size: 20px;
+        }
+        table{
+            border: 2px solid black;
+            text-align: center;
+        }
+        .title
+        {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <div class='wrapper'>
+        <div class='header'>
+            <h2 class='title'>รายงานการสั่งซื้อทั้งหมด</h2>
+        </div>
+        <div>
+            <div class='details'>
+                <table >
+                    <thead>
+                        <tr>
+                            <td>รหัสคำสั่งซื้อ</td>
+                            <td>เวลาสั่งซื้อ</td>
+                            <td>ชื่อ-สกุล</td>
+                            <td>ราคารวม</td>
+                            <td>สถานะการยืนยัน</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for orders in order %}
+                        <tr>
+                            <td>{{orders.order_id}}</td>
+                            <td>{{orders.order_date}}</td>
+                            <td>{{orders.mem_id.firstname}}-{{orders.mem_id.lastname}}</td>
+                            <td>{{orders.Total}}</td>
+                            {% if orders.statusOrder == 0  %}
+                            <td>ยังไม่ได้รับการยืนยัน</td>
+                        {% else %}
+                            <td>ได้รับการยืนยันเรียบร้อย</td>
+                        {% endif %}
+                            
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <hr class='hrItem' />
+            </div>
+        </div>
+</body>
+
+</html>

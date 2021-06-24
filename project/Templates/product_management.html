@@ -1,0 +1,86 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+{% block style %}
+<style>
+    td img {
+    max-width: 60px;
+    max-height: 60px;
+    margin: 3px;
+    }
+</style>
+{% endblock %}
+
+<a style="margin: 20px 0px 0px 20px ;" class="btn btn-success" href="{% url 'pro_create' %}">เพิ่มข้อมูล</a>
+<table id="MyTable" class="table">
+    <thead>
+        <tr>
+            <td>{{prolabel.pro_id.label}}</td>
+            <td>{{prolabel.pro_name.label}}</td>
+            <td>ปริมาณสินค้า</td>
+            <td>ประเภทสินค้า</td>
+            <td>{{prolabel.brand.label}}</td>
+            <td>{{prolabel.price.label}}</td>
+            <td>{{prolabel.stock.label}}</td>
+            <td>รูปสินค้า</td>
+            <td style="width: 100px;"></td>
+        </tr>
+    </thead>
+  
+    <tbody>
+        {% for pro in data %}
+        {% with images=pro.pro_id|getimages %}
+        <tr>
+            <td>{{pro.pro_id}}</td>
+            <td>{{pro.pro_name}}</td>
+            <td>{{pro.sizes}}</td>
+            <td>{{pro.cate_id}}</td>
+            <td>{{pro.brand}}</td>
+            <td>{{pro.price}}</td>
+            <td>{{pro.stock}}</td>
+            <td>
+                {% for img in images %}
+                    <img src="{{ img.image_file.url }}" class="rounded">
+                {% endfor %}
+            </td>
+            <td>
+                <a class="btn btn-warning" href="{% url 'pro_update' id=pro.pro_id %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                <a class="btn btn-danger" href="javascript:del('{% url 'pro_delete' id=pro.pro_id %}')"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                
+            </td>
+        </tr>
+        {% endwith %}
+        {% endfor %}
+    </tbody>
+  
+  
+</table>
+
+{% endblock content %}
+
+{% block js %}
+
+<script>
+    $(document).ready(function () {
+        $('#MyTable').DataTable();
+    });
+</script>
+<script>
+    function del(url) {
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    document.location = url;
+                }
+           });
+    }
+</script>
+{% endblock js %}
+    

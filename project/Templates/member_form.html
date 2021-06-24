@@ -1,0 +1,26 @@
+{% extends 'main_user.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<style>
+    .memform{
+        margin-bottom: 1rem;
+        background-color: blue;
+        padding: 20px;
+        color: white;
+        border-radius: 20px;
+    }
+</style>
+<div class="col-4 m-auto">
+    <form method="POST" class="memform">
+        {% csrf_token %}
+        {{form|crispy}}
+        <div>
+            <button class="btn btn-danger">ยืนยัน</button>
+            <a type="button" class="btn btn-secondary" href="{% url 'Index' %}">กลับ</a>
+        </div>
+    </form>
+</div>
+    
+{% endblock content %}
+    

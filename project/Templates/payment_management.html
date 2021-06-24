@@ -1,0 +1,79 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<table id="MyTable" class="table">
+    <thead>
+        <tr>
+            <td>รหัสชำระเงิน</td>
+            <td>ชื่อ-นามสกุล</td>
+            <td>ราคา</td>
+            <td>{{label.pay_date.label}}</td>
+            <td>หลักฐานการชำระเงิน</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </thead>
+  
+    <tbody>
+        {% for pay in data %}
+        {% with images=pay.pay_id|getimagespay %}
+        <tr>
+            <td>{{pay.pay_id}}</td>
+            <td>{{pay.order_id.mem_id.firstname}} {{pay.order_id.mem_id.lastname}}</td>
+            <td>{{pay.order_id.Total}}</td>
+            <td>{{pay.pay_date}}</td>
+            <td>
+                {% for img in images %}
+                    <img width="170" height="190" src="{{ img.image_file.url }}" class="rounded">
+                {% endfor %}
+            </td>
+            {% if pay.order_id.statusOrder == 0  %}
+                <td>ยังไม่ได้รับการยืนยัน</td>
+            {% else %}
+                <td>ได้รับการยืนยันเรียบร้อย</td>
+            {% endif %}
+           
+            <td>
+                {% if pay.order_id.statusOrder != 1 %}
+                    <a class="btn btn-success" href="{% url 'payment_confirm' id=pay.order_id %}"><i class="fa fa-check" aria-hidden="true"></i>
+                    </a>
+                {% endif %} 
+            </td>
+         
+        </tr>
+        {% endwith %}
+        {% endfor %}
+        
+    </tbody>
+  
+  
+</table>
+
+
+{% endblock content %}
+
+{% block js %}
+
+<script>
+    $(document).ready(function () {
+        $('#MyTable').DataTable();
+    });
+</script>
+
+<script>
+    function del(url) {
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    document.location = url;
+                }
+           });
+    }
+</script>
+{% endblock js %}

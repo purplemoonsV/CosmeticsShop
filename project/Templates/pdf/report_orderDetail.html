@@ -1,0 +1,71 @@
+{% load static %}
+<html>
+<head>
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+        
+        @font-face {
+            font-family: "THSarabunNew";
+            src: url('C:/Users/k2002/CosmeticsShop/static/fonts/THSarabunNew.ttf');
+            
+            }
+        body{
+            font-family: "THSarabunNew";
+            font-size: 20px;
+        }
+        table{
+            border: 2px solid black;
+            text-align: center;
+        }
+        .title
+        {
+            text-align: center;
+        }
+        .total {
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <div class='wrapper'>
+        <div class='header'>
+            <h2 class='title'>รายงานการสั่งซื้อ</h2>
+        </div>
+        <div>
+            <div class='details'>
+                <table >
+                    <thead>
+                        <tr>
+                            <td>รหัสคำสั่งซื้อ</td>
+                            <td>ชื่อ-สกุล</td>
+                            <td>ชื่อสินค้า</td>
+                            <td>ราคาสินค้า</td>
+                            <td>จำนวน</td>
+                            <td>ราคารวม</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for orders in order %}
+                        <tr>
+                            <td>{{orders.order_id}}</td>
+                            <td>{{orders.order_id.mem_id.firstname}} {{orders.order_id.mem_id.lastname}}</td>
+                            <td>{{orders.pro_id.pro_name}}</td>
+                            <td>{{orders.pro_id.price}}</td>
+                            <td>{{orders.quantity}}</td>
+                            <td>{{orders.Totals}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                
+                <p class="total">รวมทั้งหมด {{total}} บาท</p>
+                
+                <hr class='hrItem' />
+            </div>
+        </div>
+</body>
+
+</html>

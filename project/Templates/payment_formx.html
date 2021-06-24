@@ -1,0 +1,140 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="{% static './css/payment.css' %}" rel="stylesheet">
+
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h1>
+                    <i class="fas fa-shipping-fast"></i>
+                    การชำระเงิน
+                </h1>
+                <div class="name">
+                    <div>
+                        <label for="f-name">ชื่อ</label>
+                        <span name="f-name" readonly="readonly">{{member.mem_id.firstname}}</span>
+                    </div>
+                    <div>
+                        <label for="l-name">นามสกุล</label>
+                        <span name="f-name" readonly="readonly">{{member.mem_id.lastname}}</span>
+                    </div>
+                </div>
+                <div class="street">
+                    <label for="name">ที่อยู่</label>
+                    <textarea class="form-control h-150px" readonly="readonly" rows="6" id="comment">{{member.mem_id.address}}</textarea>
+                </div> 
+                <div class="street">
+                    <div>
+                        <label for="name">อัพโหลด</label>
+                        {{form.files}}
+                    </div>
+                    
+                </div> 
+                <div>
+                    <label>วันที่ชำระเงิน:</label>
+                        {{form.pay_date}}
+                </div>
+                <div class="btns">
+                    <button type="submit">สั่งซื้อ</button>
+                    <button type="menu">กลับไปที่ตะกร้า</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+<!-- <div class="container-fluid">
+    <form class="form-valide" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+       
+        <div class="col-lg-12">
+            <div class="card">
+    
+                <div class="card-body">
+                    <div class="basic-form">
+                        <h2 class="text-center"">ชำระสินค้า</h2>
+                            <div class="form-group">
+                                <label>ชื่อ</label>
+                                <span class="form-control"  readonly="readonly">{{member.mem_id.firstname}}</span>
+                            </div>
+                            <div class="form-group">
+                                <label>นามสกุล</label>
+                                <span class="form-control"  readonly="readonly">{{member.mem_id.lastname}}</span>
+                            </div>
+                            <div class="form-group">
+                                <label>เบอร์โทร</label>
+                                <span class="form-control"  readonly="readonly">{{member.mem_id.tell}}</span>
+                            </div>
+                            <div class="basic-form">
+                                
+                                    <div class="form-group">
+                                        <label>ที่อยู่:</label>
+                                        <textarea class="form-control h-150px" readonly="readonly" rows="6" id="comment">{{member.mem_id.address}}</textarea>
+                                    </div>
+                                
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">อัพโหลดไฟล์</h4>
+                <div class="basic-form">
+                        <div class="form-group">
+                            {{form.files}}
+                        </div>
+                        <div class="form-group">
+                            <label>วันที่ชำระเงิน:</label>
+                            {{form.pay_date}}
+                        </div>
+                </div>
+            </div>
+        </div>
+            <button class="btn btn-danger" type="submit" onclick="formSubmit()">บันทึก</button>
+            <a class="btn btn-secondary" href="{% url 'pro_management'%}">ยกเลิก</a>
+    </form>
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-validation">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+{% block js %}
+<script>
+    var MAX_FILES = 5;
+    function formSubmit() {
+        var el = document.querySelector('[type="file"]');
+        if (el.files.length > MAX_FILES) {
+            alert('เลือกได้ไม่เกิน ' + MAX_FILES + ' ไฟล์');
+        } else {
+            document.querySelector('form').submit();
+        }
+    }
+</script>
+
+<script>
+    var form_fields = document.getElementsByTagName('input')
+    form_fields[2].type='text';
+    form_fields[2].className='form-control'
+</script>
+
+
+{% endblock js %} -->
+    

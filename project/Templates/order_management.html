@@ -1,0 +1,73 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<a href="{% url 'ReportOrder' %}" class="btn btn-success">ReportAll</a>
+<table id="MyTable" class="table">
+    <thead>
+        <tr>
+            <td>เลขใบสั่งซื้อ</td>
+            <td>{{label.order_date.label}}</td>
+            <td>{{memlabel.firstname.label}}-{{memlabel.lastname.label}}</td>
+            <td>{{memlabel.tell.label}}</td>
+            <td>{{label.Total.label}}</td>
+            <td>{{label.statusOrder.label}}</td>
+            <td></td>
+        </tr>
+    </thead>
+  
+    <tbody>
+        {% for order in data %}
+        <tr>
+            <td>{{order.order_id}}</td>
+            <td>{{order.order_date}}</td>
+            <td>{{order.mem_id.firstname}}-{{order.mem_id.lastname}}</td>
+            <td>{{order.mem_id.tell}}</td>
+            <td>{{order.Total}}</td>
+            {% if order.statusOrder == 0  %}
+                <td>ยังไม่ได้รับการยืนยัน</td>
+            {% else %}
+                <td>ได้รับการยืนยันเรียบร้อย</td>
+            {% endif %}
+                
+            <td>
+                <a class="btn btn-warning" href="{% url 'order_detail' id=order.order_id %}"><i class="fa fa-info" aria-hidden="true"></i></a>
+                <a class="btn btn-danger" href="javascript:del('{% url 'order_delete' id=order.order_id %}')"><i class="fa fa-trash-o" aria-hidden="true"></i>
+                </a>
+                <a class="btn btn-success" href="{% url 'ReportOrderDetail' id=order.order_id  %}"><i class="fa fa-file-text" aria-hidden="true"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  
+  
+</table>
+
+
+{% endblock content %}
+
+{% block js %}
+
+<script>
+    $(document).ready(function () {
+        $('#MyTable').DataTable();
+    });
+</script>
+
+<script>
+    function del(url) {
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    document.location = url;
+                }
+           });
+    }
+</script>
+{% endblock js %}

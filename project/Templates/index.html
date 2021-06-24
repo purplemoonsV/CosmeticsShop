@@ -1,0 +1,14 @@
+{% extends 'main_user.html' %}
+{% load static %}
+<style>
+    video{
+        margin: 10px;
+    }
+</style>
+{% block content %}
+    <div>
+        <video class="col-md-12" controls>
+            <source src="{% static './vdo/v1.mp4' %}" type="video/mp4">
+          </video>
+    </div>
+{% endblock content %}

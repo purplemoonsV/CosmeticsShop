@@ -1,0 +1,55 @@
+{% extends 'main_user.html' %}
+{% load static %}
+{% block content %}
+<!-- Product -->
+	<section class="bg0 p-t-23 p-b-140">
+		<div class="container">
+			<div class="p-b-10">
+				<h3 class="ltext-103 cl5 text-center">
+					สิ่งที่ถูกใจ
+				</h3>
+			</div>
+			<div class="row isotope-grid">
+				
+				{% for lists in list %}
+				{% with images=lists.pro_id|getimages %}
+				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item">
+					<!-- Block2 -->
+					<div class="block2">
+						<div class="block2-pic hov-img0">
+							{% for img in images %}
+								<img src="{{ img.image_file.url }}" alt="IMG-PRODUCT">
+							{% endfor %}
+						
+						</div>
+
+						<div class="block2-txt flex-w flex-t p-t-14">
+							<div class="block2-txt-child1 flex-col-l ">
+								<a href="{% url 'pro_detaill' id=lists.pro_id %}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									{{lists.pro_name}}
+								</a>
+
+								<span class="stext-105 cl3">
+									${{lists.price}}
+								</span>
+							</div>
+							<div class="block2-txt-child2 flex-r p-t-3">
+								<a href="{% url 'remove_product' lists.pro_id %}" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+								<i class="fa fa-heart"></i>
+							</a>
+							</div>
+						</div>
+				
+					</div>
+				</div>
+				
+			{% endwith %}
+			{% endfor %}
+			
+			</div>
+
+		</div>
+	</section>
+
+{% endblock content %}
+    

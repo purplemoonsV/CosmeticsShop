@@ -1,0 +1,60 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<table id="MyTable" class="table">
+    <thead>
+        <tr>
+            <td>{{prolabel.pro_name.label}}</td>
+            <td>{{prolabel.price.label}}</td>
+            <td>{{label.quantity.label}}</td>
+            <td>{{label.Totals.label}}</td>
+            <td></td>
+        </tr>
+    </thead>
+  
+    <tbody>
+        {% for orderde in data %}
+        <tr>
+            <td>{{orderde.pro_id.pro_name}}</td>
+            <td>{{orderde.pro_id.price}}</td>
+            <td>{{orderde.quantity}}</td>
+            <td>{{orderde.Totals}}</td>
+            <td>
+                
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  
+  
+</table>
+
+
+{% endblock content %}
+
+{% block js %}
+
+<script>
+    $(document).ready(function () {
+        $('#MyTable').DataTable();
+    });
+</script>
+
+<script>
+    function del(url) {
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    document.location = url;
+                }
+           });
+    }
+</script>
+{% endblock js %}

@@ -1,0 +1,62 @@
+{% extends 'main.html' %}
+{% block content %}
+{% load static %}
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col-lg-3 col-sm-6">
+            <div class="card gradient-1">
+                <div class="card-body">
+                    <h3 class="card-title text-white">สินค้าทั้งหมด</h3>
+                    <div class="d-inline-block">
+                        <h2 class="text-white">{{countp}}</h2>
+                    </div>
+                    <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <div class="card gradient-2">
+                <div class="card-body">
+                    <h3 class="card-title text-white">ออเดอร์ทั้งหมด</h3>
+                    <div class="d-inline-block">
+                        <h2 class="text-white">{{counto}}</h2>
+
+                    </div>
+                    <span class="float-right display-5 opacity-5"><i class="fa fa-money"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <div class="card gradient-3">
+                <div class="card-body">
+                    <h3 class="card-title text-white">สมาชิกทั้งหมด</h3>
+                    <div class="d-inline-block">
+                        <h2 class="text-white">{{countm}}</h2>
+                    </div>
+                    <span class="float-right display-5 opacity-5"><i class="fa fa-users"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <div class="card gradient-4">
+                <div class="card-body">
+                    <h3 class="card-title text-white">ออเดอร์ที่ยังไม่ยืนยัน</h3>
+                    <div class="d-inline-block">
+                        <h2 class="text-white">{{countno}}</h2>
+                    </div>
+                    <span class="float-right display-5 opacity-5"><i class="fa fa-heart"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- <div class="col-lg-6">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Pie Chart</h4>
+            <div id="flotPie2" class="flot-chart" style="padding: 0px; position: relative;"><canvas class="flot-base" width="620" height="525" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 413.75px; height: 350px;"></canvas><canvas class="flot-overlay" width="620" height="525" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 413.75px; height: 350px;"></canvas><div class="legend"><div style="position: absolute; width: 56px; height: 80px; top: 5px; right: 5px; background-color: rgb(255, 255, 255); opacity: 0.85;"> </div><table style="position:absolute;top:5px;right:5px;;font-size:smaller;color:#545454"><tbody><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid #e1e8f0;overflow:hidden"></div></div></td><td class="legendLabel">Series 1</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid #7571F9;overflow:hidden"></div></div></td><td class="legendLabel">Series 2</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid #ff5e5e;overflow:hidden"></div></div></td><td class="legendLabel">Series 3</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid #e62739;overflow:hidden"></div></div></td><td class="legendLabel">Series 4</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid #9097c4;overflow:hidden"></div></div></td><td class="legendLabel">Series 5</td></tr></tbody></table></div><span class="pieLabel" id="pieLabel0" style="position: absolute; top: 57px; left: 217.307px;"><div style="font-size:8pt; text-align:center; padding:2px; color:white;">Series 1<br>17%</div></span><span class="pieLabel" id="pieLabel1" style="position: absolute; top: 212px; left: 260.307px;"><div style="font-size:8pt; text-align:center; padding:2px; color:white;">Series 2<br>31%</div></span><span class="pieLabel" id="pieLabel2" style="position: absolute; top: 263px; left: 108.307px;"><div style="font-size:8pt; text-align:center; padding:2px; color:white;">Series 3<br>17%</div></span><span class="pieLabel" id="pieLabel3" style="position: absolute; top: 138px; left: 42.3073px;"><div style="font-size:8pt; text-align:center; padding:2px; color:white;">Series 4<br>24%</div></span><span class="pieLabel" id="pieLabel4" style="position: absolute; top: 46px; left: 120.307px;"><div style="font-size:8pt; text-align:center; padding:2px; color:white;">Series 5<br>10%</div></span></div>
+        </div>
+    </div>
+</div> -->
+{% endblock content %}
