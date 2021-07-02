@@ -2,35 +2,37 @@
 {% load static %}
 {% block content %}
 
-<table id="MyTable" class="table">
-    <thead>
-        <tr>
-            <td>{{prolabel.pro_name.label}}</td>
-            <td>{{prolabel.price.label}}</td>
-            <td>{{label.quantity.label}}</td>
-            <td>{{label.Totals.label}}</td>
-            <td></td>
-        </tr>
-    </thead>
-  
-    <tbody>
-        {% for orderde in data %}
-        <tr>
-            <td>{{orderde.pro_id.pro_name}}</td>
-            <td>{{orderde.pro_id.price}}</td>
-            <td>{{orderde.quantity}}</td>
-            <td>{{orderde.Totals}}</td>
-            <td>
-                
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-  
-  
-</table>
-
-
+<div class="m-4">
+    <table id="MyTable" class="table">
+        <thead>
+            <tr>
+                <td>{{prolabel.pro_name.label}}</td>
+                <td>{{prolabel.price.label}}</td>
+                <td>{{label.quantity.label}}</td>
+                <td>{{label.Totals.label}}</td>
+                <td></td>
+            </tr>
+        </thead>
+      
+        <tbody>
+            {% for orderde in data %}
+            <tr>
+                <td>{{orderde.pro_id.pro_name}}</td>
+                <td>{{orderde.pro_id.price}}</td>
+                <td>{{orderde.quantity}}</td>
+                <td>{{orderde.Totals}}</td>
+                <td>
+                    
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      
+      
+    </table>
+    
+    
+</div>
 {% endblock content %}
 
 {% block js %}

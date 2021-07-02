@@ -1,38 +1,104 @@
 {% extends 'main.html' %}
 {% load crispy_forms_tags %}
 {% load static %}
+
 {% block content %}
-<div class="m-auto col-sm-12" style="background-color: khaki;">
+<div class="m-auto col-sm-7" style="background-color: #FFCDCD;">
     <form method="post" enctype="multipart/form-data">
         <h5 class="text-center m-4">กรอกข้อมูลสินค้า</h5>
         {% csrf_token %}
-        {{form.pro_id}}
-        <div class="col-sm-6">{{form.pro_name}}{{form.brand}}</div>
-        <div class="col-sm-6"> </div>
-        {{form.cate_id}}
-       
-        {{form.price}}
-        {{form.stock}}
-        {{form.sizes}}
-        {{form.ingredient}}
-        {{form.description}}
-    <div class="py-2">
-        <button class="btn btn-danger" type="button" onclick="formSubmit()">บันทึก</button>
-        <a class="btn btn-secondary" href="{% url 'pro_management'%}">ยกเลิก</a>
-    </div>
-    <script>
-        var MAX_FILES = 5;
-        function formSubmit() {
-            var el = document.querySelector('[type="file"]');
-            if (el.files.length > MAX_FILES) {
-                alert('เลือกได้ไม่เกิน ' + MAX_FILES + ' ไฟล์');
-            } else {
-                document.querySelector('form').submit();
+
+        <div class="col-md-12 row">
+            <div class="col-md-6">
+                <label>รหัสสินค้า</label>
+                {{form.pro_id}}
+
+            </div>
+            <div class="col-md-6">
+                <label>ชื่อสินค้า</label>
+                {{form.pro_name}}
+            </div>
+        </div>
+        <div class="col-md-12 row">
+            <div class="col-md-4">
+                <label>ราคาสินค้า</label>
+                {{form.price}}
+            </div>
+            <div class="col-md-4">
+                <label>แบนด์สินค้า</label>
+                {{form.brand}}
+            </div>
+
+            <div class="col-md-4">
+                <label>สินค้าในสต็อก</label>
+                {{form.stock}}
+            </div>
+
+
+        </div>
+        <div class="col-md-12 row">
+            <div class="col-md-6">
+                <label>ประเภทสินค้า</label>
+                {{form.cate_id}}
+            </div>
+            <div class="col-md-6">
+                <label>ขนาดสินค้า</label>
+                {{form.sizes}}
+            </div>
+        </div>
+
+        <div class="col-md-12 row m-3">
+            <div class="col-md-6">
+                <label>ส่วนประสมของสินค้า</label>
+                {{form.ingredient}}
+            </div>
+            <div class="col-md-6">
+                <label>รายละเอียดสินค้า</label>
+                {{form.description}}
+            </div>
+        </div>
+        <div class="py-2 text-center">
+            <button class="btn btn-success col-md-3" type="button" onclick="formSubmit()">บันทึก</button>
+            <a class="btn btn-danger col-md-3" href="{% url 'pro_management'%}">ยกเลิก</a>
+        </div>
+        <script>
+            var MAX_FILES = 5;
+            function formSubmit() {
+                var el = document.querySelector('[type="file"]');
+                if (el.files.length > MAX_FILES) {
+                    alert('เลือกได้ไม่เกิน ' + MAX_FILES + ' ไฟล์');
+                } else {
+                    document.querySelector('form').submit();
+                }
             }
-        }
-    </script>
+        </script>
     </form>
 </div>
-       
+
 {% endblock content %}
-    
+
+
+{% block js %}
+<script>
+    var form_fields = document.getElementsByTagName('input')
+    var form_select = document.getElementsByTagName('select')
+    var text_area = document.getElementsByTagName('textarea')
+    form_fields[1].className += 'form-control m-1';
+    form_fields[2].className += 'form-control m-1';
+    form_fields[3].className += 'form-control m-1';
+    form_fields[4].className += 'form-control m-1';
+    form_fields[5].className += 'form-control m-1';
+
+    form_select[1].className += 'form-control';
+    form_select[0].className += 'form-control';
+    text_area[0].rows = 5;
+    text_area[1].rows = 5;
+    text_area[0].cols = 25;
+    text_area[1].cols = 25;
+
+    text_area[0].className+= 'form-control';
+    text_area[1].className+= 'form-control';
+
+
+</script>
+{% endblock js %}

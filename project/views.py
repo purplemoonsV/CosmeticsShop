@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import render,redirect
 from django.utils.tree import Node
 from .forms import *
@@ -16,13 +17,13 @@ from .utils import render_to_pdf #created in step 4
 #---------------------REPORT
 def report_order(request):
     data = {
-            'order':Order.objects.all()
+            'order':Order.objects.all()#ดึงข้อมูลออเดอร์ทั้งหมด
         }
     pdf = render_to_pdf('pdf/invoice.html', data)
     return HttpResponse(pdf, content_type='application/pdf')
 
 def report_orderdetail(request,id):
-    o = Order.objects.get(order_id=id)
+    o = Order.objects.get(order_id=id)#ดึงข้อมุลมาจาก ออเดอร์ที่ เท่ากับ id ที่รับเข้ามา
     data = {
             'order':OrderDetail.objects.filter(order_id=id),
             'total':o.Total
@@ -140,6 +141,8 @@ def register(request):
 
 
 def MemberUpdate(request, id):
+    if not isLogin(request):
+        return redirect(('/'))
     if request.method=="POST":
         data = Member.objects.get(mem_id=id)
         form = MemberForm(instance=data, data=request.POST)
@@ -261,6 +264,7 @@ def shop(request):
         data = Product.objects.all()
         id =request.session["id"]
         m = Member.objects.get(mem_id = id)
+       
         return render(request,'shopping.html',{'product':data,'m':m})
     except:
         data = Product.objects.all()
@@ -278,7 +282,15 @@ def dashborad(request):
     countp = Product.objects.count()
     counto = Order.objects.count()
     countno = Order.objects.filter(statusOrder= 0).count()
-    context = {'countm':countm,'countp':countp,'counto':counto,'countno':countno}
+    pro = Product.objects.all()
+    chart_order = []
+    _year = datetime.now().year
+    for month in range(1,13,1):
+        order_find = Order.objects.filter(order_date__month=month).filter(order_date__year=_year).count()
+        chart_order.append(order_find)
+   
+    
+    context = {'countm':countm,'countp':countp,'counto':counto,'countno':countno,'chart_order':chart_order,'pro':pro}
     return render(request,'dashborad.html',context)
 #----------------------------------------------
 def Categorys(request):
@@ -454,6 +466,9 @@ def Checkout(request):
         request.session["odid"] = order.order_id
         for items in item:
             OrderDetail.objects.create(order_id_id=order.order_id,pro_id_id = items.pro_id_id,quantity=items.quantity,Totals=items.Totals)
+            pro = Product.objects.get(pro_id= items.pro_id_id)
+            pro.stock -= items.quantity
+            pro.save()
         cart.Total = 0
         cart.save()
         item.delete()

@@ -107,7 +107,7 @@ class Product(models.Model):
     cate_id = models.ForeignKey(Category,null=True,on_delete=models.SET_NULL)
     brand = models.CharField(max_length=100)
     price = models.IntegerField()
-    stock = models.CharField(max_length=500)
+    stock = models.IntegerField()
     description = models.TextField()
     sizes = models.ForeignKey(Size,null=True,on_delete=models.SET_NULL)
     ingredient = models.TextField()

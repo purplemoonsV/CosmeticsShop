@@ -1,6 +1,24 @@
 {% extends 'main.html' %}
 {% block content %}
 {% load static %}
+<style>
+    img {
+        width: 300px;
+        height: 200px;
+    }
+
+    .top5 {
+        display:grid;
+        width:100%;
+        grid-template-columns: repeat(3,1fr);
+    }
+    .fa-heart{
+        color: tomato;
+    }
+    p{
+        margin: 0;
+    }
+</style>
 <div class="container-fluid mt-3">
     <div class="row">
         <div class="col-lg-3 col-sm-6">
@@ -51,6 +69,33 @@
     </div>
 
 </div>
+<div class="col-md-12">
+    <canvas id="myChart" width="800" height="300"></canvas>
+    <h2 class="text-center m-2">3 อันดับสินค้ายอดนิยม</h2>
+    
+    <div class="top5">
+
+        {% for item in pro|dictsortreversed:"favourite.count" %}
+        {% with images=item.pro_id|getimagesone %}
+        {% if forloop.counter <= 3 %} 
+        <div class="text-center">
+
+            {% for img in images %}
+            {% if forloop.counter == 1 %}
+            <img src="{{ img.image_file.url }}" alt="IMG-PRODUCT">
+            {% endif %}
+            {% endfor %}
+        <p>{{item.pro_name}}</p>
+        <p><i class="fa fa-heart"></i> {{item.favourite.count}}</p>
+  
+    </div>
+    
+        
+    {% endif %}
+    {% endwith %}
+    {% endfor %}
+</div>
+</div>
 <!-- <div class="col-lg-6">
     <div class="card">
         <div class="card-body">
@@ -59,4 +104,44 @@
         </div>
     </div>
 </div> -->
+
+
 {% endblock content %}
+
+{% block js %}
+
+<script>
+    var data = []
+    {% for item in chart_order %}
+    data.push('{{item}}')
+    {% endfor %}
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'],
+            datasets: [{
+                label: 'รายการสั่งซื้อทั้งหมด',
+                data: data,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+{% endblock js %}

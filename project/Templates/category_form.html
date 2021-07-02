@@ -2,17 +2,25 @@
 {% load crispy_forms_tags %}
 {% load static %}
 {% block content %}
-<div class="m-auto col-6">
+<div class="m-auto col-sm-7" style="background-color: #FFCDCD;">
     <form method="POST">
         <h5 class="text-center m-4">กรอกข้อมูลสินค้า</h5>
         {% csrf_token %}
         {{form}}
-    <div class="py-2">
-        <button class="btn btn-danger" type="submit" >บันทึก</button>
-        <a class="btn btn-secondary" href="{% url 'cate_management'%}">ยกเลิก</a>
+    <div class="py-2 text-center">
+        <button class="btn btn-success col-md-3" type="submit" >บันทึก</button>
+        <a class="btn btn-danger col-md-3" href="{% url 'cate_management'%}">ยกเลิก</a>
     </div>
     </form>
 </div>
        
 {% endblock content %}
+    
+
+{% block js %}
+<script>
+    var form_fields = document.getElementsByTagName('input')
+    form_fields[1].className += 'form-control m-1';
+</script>
+{% endblock js %}
     

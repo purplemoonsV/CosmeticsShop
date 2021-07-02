@@ -1,40 +1,42 @@
 {% extends 'main.html' %}
 {% block content %}
-<table id="MyTable" class="table">
-    <thead>
-        <tr>
-            <td>{{memlabel.mem_id.label}}</td>
-            <td>{{memlabel.firstname.label}}</td>
-            <td>{{memlabel.lastname.label}}</td>
-            <td>{{memlabel.email.label}}</td>
-            <td>{{memlabel.password.label}}</td>
-            <td>{{memlabel.tell.label}}</td>
-            <td>{{memlabel.address.label}}</td>
-            <td style="width: 100px;"></td>
-        </tr>
-    </thead>
-  
-    <tbody>
-        {% for Member in Members %}
-        <tr>
-            <td>{{Member.mem_id}}</td>
-            <td>{{Member.firstname}}</td>
-            <td>{{Member.lastname}}</td>
-            <td>{{Member.email}}</td>
-            <td>{{Member.password}}</td>
-            <td>{{Member.tell}}</td>
-            <td>{{Member.address}}</td>
-            <td>
-                <a class="btn btn-warning" href="{% url 'mem_update' id=Member.mem_id %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                <a class="btn btn-danger" href="{% url 'mem_delete' id=Member.mem_id %}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-  
-  
-</table>
-
+<div class="m-4">
+    <table id="MyTable" class="table">
+        <thead>
+            <tr>
+                <td>{{memlabel.mem_id.label}}</td>
+                <td>{{memlabel.firstname.label}}</td>
+                <td>{{memlabel.lastname.label}}</td>
+                <td>{{memlabel.email.label}}</td>
+                <td>{{memlabel.password.label}}</td>
+                <td>{{memlabel.tell.label}}</td>
+                <td>{{memlabel.address.label}}</td>
+                <td style="width: 100px;"></td>
+            </tr>
+        </thead>
+      
+        <tbody>
+            {% for Member in Members %}
+            <tr>
+                <td>{{Member.mem_id}}</td>
+                <td>{{Member.firstname}}</td>
+                <td>{{Member.lastname}}</td>
+                <td>{{Member.email}}</td>
+                <td>{{Member.password}}</td>
+                <td>{{Member.tell}}</td>
+                <td>{{Member.address}}</td>
+                <td>
+                    <a class="btn btn-warning" href="{% url 'mem_update' id=Member.mem_id %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                    <a class="btn btn-danger" href="{% url 'mem_delete' id=Member.mem_id %}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      
+      
+    </table>
+    
+</div>
 
 {% endblock content %}
 

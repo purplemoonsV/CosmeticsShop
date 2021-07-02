@@ -3,7 +3,7 @@
 
 {% block content %}
 
-	
+
 <!-- Product -->
 <section class="bg0 p-t-23 p-b-140">
 	<div class="container">
@@ -44,11 +44,7 @@
 					ตัวกรอง
 				</div>
 
-				<div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
-					<i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
-					<i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-					ค้นหา
-				</div>
+			
 			</div>
 
 			<!-- <!-- Search product -->
@@ -167,7 +163,7 @@
 					<div class="block2-pic hov-img0">
 						{% for img in images %}
 						{% if forloop.counter == 1 %}
-						<img src="{{ img.image_file.url }}" alt="IMG-PRODUCT">
+							<img src="{{ img.image_file.url }}" alt="IMG-PRODUCT">
 						{% endif %}
 						{% endfor %}
 					
@@ -184,20 +180,22 @@
 								฿{{products.price}}
 							</span>
 						</div>
+						<p>
 								{% if m in products.favourite.all %}
 							<div class="block2-txt-child2 flex-r p-t-3">
 								<a href="{% url 'remove_product' products.pro_id %}" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-								<i class="fa fa-heart"></i>
+								<i class="fa fa-heart"></i> {{products.favourite.count}}
 							</a>
 							</div>
 							
 							{% else %}
 							<div class="block2-txt-child2 flex-r p-t-3">
 								<a href="{% url 'add_product' products.pro_id %}" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-								<i class="fa fa-heart-o"></i>
+								<i class="fa fa-heart-o"></i> {{products.favourite.count}}
 							</a>
 							</div>
 							{% endif %}
+							
 					</div>
 				</div>
 			</div>

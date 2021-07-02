@@ -60,7 +60,7 @@
 										</div>
 									</div>
 								</div>
-	
+							
 								<form method="post" action="{% url 'pro_detaill' id=products.pro_id %}">
 									{% csrf_token %}
 									<div class="flex-w flex-r-m p-b-10">
@@ -80,9 +80,17 @@
 												</div>
 											</div>
 		
+											
+											{% if products.stock is 0 %}
+											<p  class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+												ขออภัยสินค้าหมด
+											</p>
+											{% else %}
 											<button type="submit" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 												เพิ่มลงในตะกร้า
 											</button>
+											{% endif %}
+												
 										</div>
 									</div>	
 								</form>

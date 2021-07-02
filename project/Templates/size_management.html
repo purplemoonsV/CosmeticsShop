@@ -2,31 +2,33 @@
 {% load static %}
 {% block content %}
 <a style="margin: 20px 0px 0px 20px ;" class="btn btn-success" href="{% url 'size_create' %}">เพิ่มข้อมูล</a>
-<table id="MyTable" class="table">
-    <thead>
-        <tr>
-            <td>รหัสขนาด</td>
-            <td>{{label.sizes_pro.label}}</td>
-            <td></td>
-        </tr>
-    </thead>
-  
-    <tbody>
-        {% for size in data %}
-        <tr>
-            <td>{{size.sizes_id}}</td>
-            <td>{{size.sizes_pro}}</td>
-        
-            <td>
-                <a class="btn btn-warning" href="{% url 'size_update' id=size.sizes_id %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                <a class="btn btn-danger" href="javascript:del('{% url 'size_delete' id=size.sizes_id %}')"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-  
-  
-</table>
+<div class="m-4">
+    <table id="MyTable" class="table">
+        <thead>
+            <tr>
+                <td>รหัสขนาด</td>
+                <td>{{label.sizes_pro.label}}</td>
+                <td></td>
+            </tr>
+        </thead>
+      
+        <tbody>
+            {% for size in data %}
+            <tr>
+                <td>{{size.sizes_id}}</td>
+                <td>{{size.sizes_pro}}</td>
+            
+                <td>
+                    <a class="btn btn-warning" href="{% url 'size_update' id=size.sizes_id %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                    <a class="btn btn-danger" href="javascript:del('{% url 'size_delete' id=size.sizes_id %}')"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      
+      
+    </table>
+</div>
 
 
 {% endblock content %}
